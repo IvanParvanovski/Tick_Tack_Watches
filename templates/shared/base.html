@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block site_title %}Change Title!!!{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% block site_links %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        {% include 'shared/nav.html' with current_path=request.path %}
+    </header>
+    <main>
+        {% block site_content %}
+        {% endblock %}
+    </main>
+    <footer>
+        {% include 'shared/footer.html' %}
+    </footer>
+</body>
+</html>

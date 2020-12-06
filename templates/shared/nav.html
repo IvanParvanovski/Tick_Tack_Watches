@@ -1,0 +1,28 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/shared/nav.css' %}">
+
+<nav>
+    <ul class="nav nav-pills nav-fill">
+
+        <li class="nav-item">
+            <a id="{% if current_path == '/' %}current_url{% endif %}" class="nav-link" href="/">Home</a>
+        </li>
+
+        <li class="nav-item">
+            <a id="{% if current_path == 'watches' %}current_url{% endif %}" class="nav-link" href="#">Watches</a>
+        </li>
+
+        <li class="nav-item">
+            <a id="{% if current_path == 'sign_up' %}current_url{% endif %}" class="nav-link" href="#">Sign Up</a>
+        </li>
+
+        <li class="nav-item">
+            <a id="{% if current_path == 'sign_in' %}current_url{% endif %}" class="nav-link" href="#">Sign In</a>
+        </li>
+
+        <li class="nav-item">
+            <a id="{% if current_path == 'purchase' %}current_url{% endif %}" class="nav-link" href="#">Purchase</a> <i class="fas fa-cart-arrow-down"></i>
+        </li>
+    </ul>
+</nav>
