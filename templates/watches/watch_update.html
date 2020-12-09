@@ -1,0 +1,10 @@
+{% extends 'shared/base.html' %}
+{% block site_content %}
+    <form method="post" action="{% url 'edit watch' watch.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">
+            Submit
+        </button>
+    </form>
+{% endblock %}

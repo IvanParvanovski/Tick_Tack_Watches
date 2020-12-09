@@ -1,0 +1,23 @@
+{% extends 'shared/base.html' %}
+{% block site_content %}
+    <button>
+        <a href="{% url 'create watch' %}">Add watch</a>
+    </button>
+    <ul>
+        {% for watch in watches %}
+            <li>{{ watch.brand }}</li>
+            <button>
+                <a href="{% url 'watch details' watch.id %}">Details</a>
+            </button>
+            <button>
+                <a href="#">Purchase</a>
+            </button>
+            <button>
+                <a href="{% url 'delete watch' watch.id %}">Delete</a>
+            </button>
+            <button>
+                <a href="{% url 'edit watch' watch.id %}">Edit</a>
+            </button>
+        {% endfor %}
+    </ul>
+{% endblock %}

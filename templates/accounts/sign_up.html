@@ -1,0 +1,14 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block site_links %}
+    <link rel="stylesheet" href="{% static 'css/shared/forms.css' %}">
+{% endblock %}
+{% block site_content %}
+    <form action="{% url 'user sign up' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">
+            Submit
+        </button>
+    </form>
+{% endblock %}

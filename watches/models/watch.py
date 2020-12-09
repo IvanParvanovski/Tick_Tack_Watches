@@ -14,3 +14,6 @@ class Watch(models.Model):
     model = models.CharField(max_length=20, blank=False, null=False)
     price = models.PositiveIntegerField(default=0, blank=False, null=False)
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES, default=GENDER_CHOICES[0])
+
+    def __str__(self):
+        return f'{self.brand} Model: {self.model}'
