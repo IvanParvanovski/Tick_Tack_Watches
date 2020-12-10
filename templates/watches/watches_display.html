@@ -10,7 +10,7 @@
                 <a href="{% url 'watch details' watch.id %}">Details</a>
             </button>
             <button>
-                <a href="#">Purchase</a>
+                <a href="{% url 'create purchase' user.userprofile.id watch.id %}">Purchase</a>
             </button>
             <button>
                 <a href="{% url 'delete watch' watch.id %}">Delete</a>

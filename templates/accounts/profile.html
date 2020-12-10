@@ -1,0 +1,5 @@
+{% extends 'shared/base.html' %}
+{% block site_content %}
+    Username: {{ user.username }}
+    <img src="{{ user.userprofile.profile_picture.url }}" alt="No image">
+{% endblock %}

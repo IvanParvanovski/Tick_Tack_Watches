@@ -1,0 +1,10 @@
+{% extends 'shared/base.html' %}
+{% block site_content %}
+    <ul>
+    {% for purchase in purchases %}
+        <li>
+            {{ purchase }}
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
