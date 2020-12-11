@@ -10,36 +10,41 @@
         </li>
 
         <li class="nav-item">
-            <a id="{% if current_path == 'watches' %}current_url{% endif %}" class="nav-link" href="{% url 'display watches' %}">Watches</a>
+            <a id="{% if current_path == 'watches' %}current_url{% endif %}" class="nav-link"
+               href="{% url 'display watches' 'all' %}">Watches</a>
         </li>
 
         {% if user.is_authenticated %}
-            <li class="nav-link">
-                <a class="nav-link" href="{% url 'profile' user.id %}">Hello, {{ user.username }}</a>
-            </li>
-
+            {% if not user.is_staff %}
+                <li class="nav-link">
+                    <a class="nav-link" href="{% url 'profile' request.user.id %}">Hello, {{ request.user.username }}</a>
+                </li>
+            {% endif %}
             <li class="nav-link">
                 <a class="nav-link" href="{% url 'user sign out' %}">Sign Out</a>
             </li>
-
-            <li class="nav-item">
-                <a id="{% if current_path == 'purchase' %}current_url{% endif %}" class="nav-link" href="{% url 'purchases' user.userprofile.id %}">Purchase</a> <i class="fas fa-cart-arrow-down"></i>
-            </li>
+            {% if not user.is_staff %}
+                <li class="nav-item">
+                    <a id="{% if current_path == 'purchase' %}current_url{% endif %}" class="nav-link"
+                       href="{% url 'purchases' request.user.userprofile.id %}">Purchase</a> <i
+                        class="fas fa-cart-arrow-down"></i>
+                </li>
+            {% endif %}
         {% else %}
             <li class="nav-item">
-                <a id="{% if current_path == 'sign_up' %}current_url{% endif %}" class="nav-link" href="{% url 'user sign up' %}">Sign Up</a>
+                <a id="{% if current_path == 'sign_up' %}current_url{% endif %}" class="nav-link"
+                   href="{% url 'user sign up' %}">Sign Up</a>
             </li>
 
             <li class="nav-item">
-                <a id="{% if current_path == 'sign_in' %}current_url{% endif %}" class="nav-link" href="{% url 'user sign in' %}">Sign In</a>
+                <a id="{% if current_path == 'sign_in' %}current_url{% endif %}" class="nav-link"
+                   href="{% url 'user sign in' %}">Sign In</a>
             </li>
 
             <li class="nav-item">
-                <a id="{% if current_path == 'purchase' %}current_url{% endif %}" class="nav-link" href="{% url 'purchases' 0 %}">Purchase</a> <i class="fas fa-cart-arrow-down"></i>
+                <a id="{% if current_path == 'purchase' %}current_url{% endif %}" class="nav-link"
+                   href="{% url 'purchases' 0 %}">Purchase</a> <i class="fas fa-cart-arrow-down"></i>
             </li>
         {% endif %}
-
-
-
     </ul>
 </nav>

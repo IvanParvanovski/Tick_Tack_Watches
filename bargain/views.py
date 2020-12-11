@@ -12,7 +12,7 @@ def create_purchase(req, user_pk, watch_pk):
     return redirect('purchases', user_pk)
 
 
-@login_required(login_url='/accounts/sign_in/')
+@login_required
 def show_purchases(req, pk):
     profile = UserProfile.objects.get(pk=pk)
     context = {

@@ -1,23 +1,56 @@
 {% extends 'shared/base.html' %}
 {% block site_content %}
-    <button>
-        <a href="{% url 'create watch' %}">Add watch</a>
-    </button>
+    {% if user.is_staff %}
+        <button>
+            <a href="{% url 'create watch' %}">Add watch</a>
+        </button>
+    {% endif %}
     <ul>
         {% for watch in watches %}
             <li>{{ watch.brand }}</li>
+            <img src="{{ watch.image.url }}" alt="No image">
+
             <button>
                 <a href="{% url 'watch details' watch.id %}">Details</a>
             </button>
-            <button>
-                <a href="{% url 'create purchase' user.userprofile.id watch.id %}">Purchase</a>
-            </button>
-            <button>
-                <a href="{% url 'delete watch' watch.id %}">Delete</a>
-            </button>
-            <button>
-                <a href="{% url 'edit watch' watch.id %}">Edit</a>
-            </button>
+            {% if user.is_authenticated %}
+                {% if not user.is_staff %}
+                <button>
+                    <a href="{% url 'create purchase' user.userprofile.id watch.id %}">Purchase</a>
+                </button>
+                {% endif %}
+            {% else %}
+                <button>
+                    <a href="{% url 'create purchase' 0 0 %}">Purchase</a>
+                </button>
+            {% endif %}
+
+            {% if user.is_staff %}
+                <button>
+                    <a href="{% url 'edit watch' watch.id %}">Edit</a>
+                </button>
+                <button>
+                    <a href="{% url 'delete watch' watch.id %}">Delete</a>
+                </button>
+            {% endif %}
         {% endfor %}
     </ul>
+    {% if watches %}
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% else %}
+            <a>Previous</a>
+        {% endif %}
+
+        {{ page_obj.number }}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% else %}
+            <a>Next</a>
+        {% endif %}
+        {% else %}
+            <h1>No watches of this type!</h1>
+    {% endif %}
+
 {% endblock %}

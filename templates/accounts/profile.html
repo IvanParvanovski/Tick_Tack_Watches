@@ -2,4 +2,12 @@
 {% block site_content %}
     Username: {{ user.username }}
     <img src="{{ user.userprofile.profile_picture.url }}" alt="No image">
+    {% if request.user.id == user.id %}
+    <button>
+        <a href="{% url 'edit profile' user.id %}">Edit</a>
+    </button>
+    <button>
+        <a href="{% url 'delete profile' user.id %}">Delete</a>
+    </button>
+    {% endif %}
 {% endblock %}

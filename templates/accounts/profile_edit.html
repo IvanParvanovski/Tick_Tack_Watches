@@ -1,0 +1,11 @@
+{% extends 'shared/base.html' %}
+{% block site_content %}
+        <form action="{% url 'edit profile' user.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        {{ profile_form }}
+        <button type="submit">
+            Submit
+        </button>
+    </form>
+{% endblock %}
