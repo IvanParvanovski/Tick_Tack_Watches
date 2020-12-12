@@ -1,56 +1,66 @@
 {% extends 'shared/base.html' %}
 {% block site_content %}
     {% if user.is_staff %}
-        <button>
-            <a href="{% url 'create watch' %}">Add watch</a>
-        </button>
+        <h2 class="text-center">You are admin and you can add watches</h2>
+        <div class="mx-auto" style="width: fit-content; margin-bottom: 5em">
+            <a class="btn btn-success" href="{% url 'create watch' %}">Add watch</a>
+        </div>
     {% endif %}
-    <ul>
+
+    <div class="row">
         {% for watch in watches %}
-            <li>{{ watch.brand }}</li>
-            <img src="{{ watch.image.url }}" alt="No image">
+            <div class="col-lg-3">
+                <div class="card text-white bg-dark mb-3" style="max-width: 21em; margin-left: 15px">
+                    <div class="card-header" style="background: rgb(52, 58, 64);">
+                        Brand: {{ watch.brand }}
+                        Model: {{ watch.model }}
+                    </div>
+                    <div class="card-body">
+                        <img class="card-img-top" src="{{ watch.image.url }}" alt="No image"
+                             style="width: 18.5em; height: 20em">
+                        Price: {{ watch.price }}
+                    </div>
+                    <div class="card-footer" style="background: rgb(52, 58, 64);">
+                        <a class="btn btn-primary" href="{% url 'watch details' watch.id %}">Details</a>
 
-            <button>
-                <a href="{% url 'watch details' watch.id %}">Details</a>
-            </button>
-            {% if user.is_authenticated %}
-                {% if not user.is_staff %}
-                <button>
-                    <a href="{% url 'create purchase' user.userprofile.id watch.id %}">Purchase</a>
-                </button>
-                {% endif %}
-            {% else %}
-                <button>
-                    <a href="{% url 'create purchase' 0 0 %}">Purchase</a>
-                </button>
-            {% endif %}
+                        {% if user.is_authenticated %}
+                            {% if not user.is_staff %}
+                                <a class="btn btn-success"
+                                   href="{% url 'create purchase' user.userprofile.id watch.id %}">Purchase</a>
+                            {% endif %}
+                        {% else %}
+                            <a class="btn btn-success" href="{% url 'create purchase' 0 0 %}">Purchase</a>
+                        {% endif %}
 
-            {% if user.is_staff %}
-                <button>
-                    <a href="{% url 'edit watch' watch.id %}">Edit</a>
-                </button>
-                <button>
-                    <a href="{% url 'delete watch' watch.id %}">Delete</a>
-                </button>
-            {% endif %}
+                        {% if user.is_staff %}
+                            <a class="btn btn-warning" href="{% url 'edit watch' watch.id %}">Edit</a>
+                            <a class="btn btn-danger" href="{% url 'delete watch' watch.id %}">Delete</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
-    {% if watches %}
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-        {% else %}
-            <a>Previous</a>
-        {% endif %}
+    </div>
 
-        {{ page_obj.number }}
+    <div class="mx-auto" style="width: fit-content">
+        {% if watches %}
+            {% if page_obj.has_previous %}
+                <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% else %}
+                <a class="btn btn-info">Previous</a>
+            {% endif %}
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">Next</a>
-        {% else %}
-            <a>Next</a>
-        {% endif %}
+            <a class="btn">{{ page_obj.number }}</a>
+
+            {% if page_obj.has_next %}
+                <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">Next</a>
+            {% else %}
+                <a class="btn btn-info">Next</a>
+            {% endif %}
         {% else %}
             <h1>No watches of this type!</h1>
-    {% endif %}
+        {% endif %}
+    </div>
+
 
 {% endblock %}

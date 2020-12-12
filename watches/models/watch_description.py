@@ -32,11 +32,11 @@ class WatchDescription(models.Model):
         ('digital', 'Digital'),
     )
 
-    case_shape = models.CharField(max_length=20, choices=CASE_SHAPE_CHOICES, default=CASE_SHAPE_CHOICES[-1])
-    chronograph = models.CharField(max_length=20, blank=True, choices=YES_NO_CHOICES)
     dial_colour = models.CharField(max_length=20, choices=COLOUR_CHOICES, default=COLOUR_CHOICES[0])
     strap_colour = models.CharField(max_length=20, choices=COLOUR_CHOICES, default=COLOUR_CHOICES[0])
+    chronograph = models.CharField(max_length=20, blank=True, choices=YES_NO_CHOICES, default=YES_NO_CHOICES[-1])
     water_resistance = models.PositiveIntegerField(default=0, blank=True)
+    case_shape = models.CharField(max_length=20, choices=CASE_SHAPE_CHOICES, default=CASE_SHAPE_CHOICES[0])
     analogue_or_digital = models.CharField(max_length=20, choices=ANALOGUE_OR_DIGITAL, default=ANALOGUE_OR_DIGITAL)
     watch = models.OneToOneField(Watch, on_delete=models.CASCADE)
 

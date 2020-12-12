@@ -1,14 +1,18 @@
-a {
-    color: black;
+nav {
+    background-color: rgba(14, 103, 117, 0.9);
+    margin-bottom: 15px;
+    font-family: "Times New Roman";
 }
 
-#current_url {
-    color: rgb(64, 6, 189);
-    border-bottom: 5px solid rgba(64, 6, 189, 0.6);
+.nav-link {
+    color: white;
 }
 
-.nav-link:hover {
-    border-bottom: 5px solid rgba(64, 6, 189, 0.6);
+a:hover {
+    color: rgb(55, 41, 35);
 }
 
+.nav-link {
+    font-size: 1.5em;
+}
 

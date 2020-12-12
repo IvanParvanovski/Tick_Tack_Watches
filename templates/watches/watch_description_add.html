@@ -1,6 +1,10 @@
 {% extends 'shared/base.html' %}
+{% load static %}
+{% block site_links %}
+    <link rel="stylesheet" href="{% static 'css/shared/forms.css' %}">
+{% endblock %}
 {% block site_content %}
-    <form action="{% url 'create watch' %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'watch description add' watch_id %}" method="post">
         {% csrf_token %}
         <div class="form-group">
             {{ form }}
@@ -9,5 +13,4 @@
             Submit
         </button>
     </form>
-    
 {% endblock %}

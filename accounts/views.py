@@ -59,6 +59,12 @@ class UserSignUp(CreateView):
     template_name = 'accounts/sign_up.html'
     success_url = reverse_lazy('display watches')
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        for (_, field) in form.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+        return form
+
     def form_valid(self, form):
         user = form.save(commit=False)
         userprofile = UserProfile(user=user,
@@ -74,14 +80,24 @@ class UserSignIn(FormView):
     template_name = 'accounts/sign_in.html'
     form_class = LoginForm
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        for (_, field) in form.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+        return form
+
     def form_valid(self, form):
         user = authenticate(**form.cleaned_data)
         if user:
             login(self.request, user)
             return redirect('home page')
 
+        form = LoginForm(self.request.POST)
+        for (_, field) in form.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
         context = {
-            'form': LoginForm(self.request.POST)
+            'form': form
         }
         return render(self.request, 'accounts/sign_in.html', context=context)
 
