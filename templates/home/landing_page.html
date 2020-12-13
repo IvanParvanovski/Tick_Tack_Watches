@@ -1,5 +1,10 @@
 {% extends 'shared/base.html' %}
 {% load static %}
+
+{% block site_title %}
+    Home
+{% endblock %}
+
 {% block site_links %}
     <link rel="stylesheet" href="{% static 'css/home/landing_page.css' %}">
     <link rel="stylesheet" href="{% static 'css/home/slideshow.css' %}">
@@ -26,7 +31,7 @@
                     <h5 class="card-title">Men</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p>
-                    <a href="{% url 'display watches' 'male' %}" class="btn btn-primary">Go somewhere</a>
+                    <a href="{% url 'display watches' 'male' %}" class="btn btn-primary">Collection</a>
                 </div>
             </div>
         </article>
@@ -38,7 +43,7 @@
                     <h5 class="card-title">Women</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p>
-                    <a href="{% url 'display watches' 'female' %}" class="btn btn-primary">Go somewhere</a>
+                    <a href="{% url 'display watches' 'female' %}" class="btn btn-primary">Collection</a>
                 </div>
             </div>
         </article>
@@ -50,7 +55,7 @@
                     <h5 class="card-title">Teenagers</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p>
-                    <a href="{% url 'display watches' 'teenagers' %}" class="btn btn-primary">Go somewhere</a>
+                    <a href="{% url 'display watches' 'teenagers' %}" class="btn btn-primary">Collection</a>
                 </div>
             </div>
         </article>
@@ -62,7 +67,7 @@
                     <h5 class="card-title">Children</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p>
-                    <a href="{% url 'display watches' 'children' %}" class="btn btn-primary">Go somewhere</a>
+                    <a href="{% url 'display watches' 'children' %}" class="btn btn-primary">Collection</a>
                 </div>
             </div>
         </article>
@@ -74,7 +79,7 @@
                     <h5 class="card-title">Unisex</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p>
-                    <a href="{% url 'display watches' 'unisex' %}" class="btn btn-primary">Go somewhere</a>
+                    <a href="{% url 'display watches' 'unisex' %}" class="btn btn-primary">Collection</a>
                 </div>
             </div>
         </article>

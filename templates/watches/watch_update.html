@@ -1,6 +1,10 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 
+{% block site_title %}
+    Watch Update
+{% endblock %}
+
 {% block site_content %}
     <form method="post" action="{% url 'edit watch' watch.id %}" enctype="multipart/form-data">
         {% csrf_token %}

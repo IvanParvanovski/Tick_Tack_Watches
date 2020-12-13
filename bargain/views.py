@@ -18,6 +18,14 @@ def show_purchases(req, pk):
     context = {
         'profile': profile,
         'purchases': profile.purchase_set.all(),
+        'prices': ' + '.join(map(str, (purchase.watch.price for purchase in profile.purchase_set.all()))),
+        'end_price': sum(purchase.watch.price for purchase in profile.purchase_set.all()),
     }
 
     return render(req, 'bargain/purchases.html', context=context)
+
+
+def remove_purchase(req, user_pk, product_pk):
+    purchase = Purchase.objects.get(pk=product_pk)
+    purchase.delete()
+    return redirect('purchases', user_pk)

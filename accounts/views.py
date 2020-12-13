@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.auth import logout, login, authenticate
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -19,39 +20,23 @@ class Profile(DetailView):
     model = User
 
 
-class ProfileEdit(View):
-    def get(self, req, pk):
-        user = User.objects.get(pk=pk)
-        form = ProfileEditForm(initial={
-            'username': user.get_username(),
-            'phone_number': user.userprofile.telephone_number,
-            'email': user.userprofile.email,
-            'profile_picture': user.userprofile.profile_picture
-        })
+class ProfileUpdate(UpdateView):
+    model = UserProfile
+    form_class = ProfileEditForm
+    template_name = 'accounts/profile_edit.html'
 
-        context = {
-            'form': form,
-        }
-        return render(req, 'accounts/profile_edit.html', context=context)
+    def get_initial(self):
+        data = super().get_initial()
+        user = self.object.user
+        data['username'] = user.username
+        return data
 
-    def post(self, req, pk):
-        user = User.objects.get(pk=pk)
-        form = ProfileEditForm(req.POST, req.FILES, instance=user)
-
-        if form.is_valid():
-            user.userprofile.email = form.cleaned_data['email']
-            user.userprofile.profile_picture = form.cleaned_data['profile_picture']
-            user.userprofile.telephone_number = form.cleaned_data['phone_number']
-            user.userprofile.profile_picture = form.cleaned_data['profile_picture']
-            form.save()
-            user.userprofile.save()
-            return redirect('profile', user.id)
-
-        context = {
-            'form': form
-        }
-
-        return render(req, 'accounts/profile_edit.html', context=context)
+    def form_valid(self, form):
+        user = self.object.user
+        user.username = form.cleaned_data['username']
+        user.save()
+        form.save()
+        return redirect('profile', self.object.user.id)
 
 
 class UserSignUp(CreateView):

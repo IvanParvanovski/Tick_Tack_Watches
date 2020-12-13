@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth.models import User
+
+from accounts.models import UserProfile
 
 
 class ProfileEditForm(forms.ModelForm):
@@ -8,11 +9,9 @@ class ProfileEditForm(forms.ModelForm):
         for (_, field) in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 
-    email = forms.CharField(max_length=150)
-    phone_number = forms.CharField(max_length=150)
-    profile_picture = forms.ImageField(max_length=150)
+    username = forms.CharField(max_length=150)
 
     class Meta:
-        model = User
-        fields = ('username', )
+        model = UserProfile
+        exclude = ('user', )
 

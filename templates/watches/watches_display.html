@@ -1,4 +1,7 @@
 {% extends 'shared/base.html' %}
+{% block site_title %}
+    Watches | Collection
+{% endblock %}
 {% block site_content %}
     {% if user.is_staff %}
         <h2 class="text-center">You are admin and you can add watches</h2>
