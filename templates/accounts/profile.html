@@ -16,7 +16,7 @@
     <div class="mx-auto" style="width: fit-content">
         {% if request.user.id == user.id or request.user.is_staff %}
             <a class="btn btn-warning" href="{% url 'edit profile' user.userprofile.id %}" style="width: fit-content">Edit</a>
-            <a class="btn btn-danger" href="{% url 'delete profile' user.userprofile.id %}" style="width: fit-content;">Delete</a>
+            <a class="btn btn-danger" href="{% url 'delete profile' user.id %}" style="width: fit-content;">Delete</a>
         {% endif %}
     </div>
 

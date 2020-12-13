@@ -93,5 +93,6 @@ def sign_out_view(req):
 
 
 def delete_profile_view(req, pk):
-    User.objects.get(pk=pk).delete()
+    user = User.objects.get(pk=pk)
+    user.delete()
     return redirect('home page')
